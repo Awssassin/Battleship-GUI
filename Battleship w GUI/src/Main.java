@@ -272,20 +272,15 @@ public class Main {
         }
     }
 
-    static void playSound(String filePath) {
-        try {
-            // Open the audio file as a stream
-            File soundFile = new File(filePath);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
-
-            // Get a sound clip resource
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioStream);
-
-            // Start the clip
-            clip.start();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
-            ex.printStackTrace();
-        }
+    static public void playSound(String file) {
+    try {
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(file).getAbsoluteFile());
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        clip.start();
+    } catch(Exception ex) {
+        System.out.println("Error with playing sound.");
+        ex.printStackTrace();
     }
+}
 }
